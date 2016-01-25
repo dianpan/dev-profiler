@@ -21,6 +21,24 @@
 
   <script type="text/babel">
     var Profile = React.createClass({
+      getDefaultProps: function(){
+        return {
+          clientId: '3f4df2ac58b22554f43a',
+          clientSecret: 'd48ad4d7033e841b0c02a69a35393606445648e6',
+          urls: {
+            user: 'https://api.github.com/users'
+          },
+          perPage: 5
+        }
+      },
+      getInitialState: function(){
+        return {
+          username: 'dianpan',
+          userData: [],
+          repoData: []
+        }
+
+      }
       render: function(){
         return(
           <div>
