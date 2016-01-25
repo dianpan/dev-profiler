@@ -21,6 +21,12 @@
 
   <script type="text/babel">
     var Profile = React.createClass({
+      handleFormSubmit: function(username){
+        this.setState({username: username}, function(){
+          this.loadUserData();
+          this.loadRepoData();
+        });
+      },
       getDefaultProps: function(){
         return {
           clientId: '3f4df2ac58b22554f43a',
@@ -33,7 +39,7 @@
       },
       getInitialState: function(){
         return {
-          username: 'dianpan',
+          username: null,
           userData: [],
           repoData: []
         }
@@ -75,9 +81,9 @@
       render: function(){
         return(
           <div>
-          <SearchForm />
-            <UserInfo userData={this.state.userData} />
-            <Repos repoData={this.state.repoData} />
+            <SearchForm onFormSubmit={this.handleFormSubmit}/>
+            {this.state.username ? <UserInfo userData={this.state.userData} /> : null}
+            {this.state.username ? <Repos repoData={this.state.repoData} /> : null}
           </div>
           )
       }
@@ -158,6 +164,16 @@
     });
 
     var SearchForm = React.createClass({
+      submitForm: function(e){
+        e.preventDefault();
+        var username = this.refs.username.value.trim();
+        if(!username){
+          alert("Please enter a username");
+          return;
+        }
+        this.props.onFormSubmit(username);
+        this.refs.username.value = '';
+      },
       render: function(){
         return(
           <form onSubmit={this.submitForm} className="form-inline">
