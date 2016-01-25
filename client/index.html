@@ -10,7 +10,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.25/browser.min.js"></script>
 
 </head>
-
 <body>
   <div class="container">
     <div class="row">
@@ -36,7 +35,7 @@
         return {
           username: 'dianpan',
           userData: [],
-          repoDate: []
+          repoData: []
         }
       },
       loadUserData: function() {
@@ -55,6 +54,19 @@
         });
       },
       loadRepoData: function() {
+        $.ajax({
+          url: this.props.urls.user + '/' + this.state.username + '/repos?per_page=' + this.props.perPage + 'client_id=' + this.props.client_id + '&client_secret=' + this.props.clientSecret + '&sort=created',
+          dataType: 'json',
+          cache: false,
+          success: function(data){
+            console.log(data);
+            this.setState({repoData: data});
+          }.bind(this),
+          error: function(xhr, status, err){
+            this.setState({username: null});
+            alert(err);
+          }.bind(this)
+        });
       },
       componentDidMount: function() {
         this.loadUserData();
@@ -64,7 +76,7 @@
         return(
           <div>
             <UserInfo userData={this.state.userData} />
-            <Repos />
+            <Repos repoData={this.state.repoData} />
           </div>
           )
       }
@@ -115,13 +127,34 @@
 
     var Repos = React.createClass({
       render: function(){
+        var repoNodes = this.props.repoData.map(function(repo, index){
+            return(
+              <Repo name={repo.name} description={repo.description} url={repo.html_url} key={index} />
+              )
+        });
         return(
           <div>
-            REPOS
+            <h2 className="page-header">Latest Repos</h2>
+            {repoNodes}
           </div>
           )
       }
-    })
+    });
+
+    var Repo = React.createClass({
+      render: function(){
+        return(
+          <div>
+            <h4>
+              <a target="_blank" href={this.props.url}>
+                {this.props.name}
+              </a>
+            </h4>
+            <p>{this.props.description}</p>
+          </div>
+          )
+      }
+    });
 
     ReactDOM.render(
       <Profile />,
