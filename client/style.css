@@ -5,3 +5,11 @@ body{
 .label{
   margin-right: 10px;
 }
+
+.repo-item{
+  background: #f9f9f9;
+  border: #f4f4f4 1px solid;
+  padding: 20px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
