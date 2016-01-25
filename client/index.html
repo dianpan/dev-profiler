@@ -13,7 +13,7 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
+      <div class="col-md-8 col-md-offset-2">
         <div id="github-profiles"></div>
       </div>
     </div>
@@ -75,6 +75,7 @@
       render: function(){
         return(
           <div>
+          <SearchForm />
             <UserInfo userData={this.state.userData} />
             <Repos repoData={this.state.repoData} />
           </div>
@@ -152,6 +153,19 @@
             </h4>
             <p>{this.props.description}</p>
           </div>
+          )
+      }
+    });
+
+    var SearchForm = React.createClass({
+      render: function(){
+        return(
+          <form onSubmit={this.submitForm} className="form-inline">
+            <div className="form-group">
+              <input type="text" ref="username" className="form-control searchInput" placeholder="Enter Github username" />
+            </div>
+            <button className="btn btn-primary" type="submit">Search</button>
+          </form>
           )
       }
     });
