@@ -35,10 +35,32 @@
         return {
           username: 'dianpan',
           userData: [],
-          repoData: []
+          repoDate: []
         }
+      },
+      loadUserData: function() {
+        $.ajax({
+          url: this.props.urls.user + '/' + this.state.username + '?client_id=' + this.props.client_id + '&client_secret=' + this.props.clientSecret,
+          dataType: 'json',
+          cache: false,
+          success: function(data){
+            console.log(data);
+            this.setState({userData: data});
+          }.bind(this),
+          error: function(xhr, status, err){
+            this.setState({username: null});
+            alert(err);
+          }.bind(this)
+        });
+      },
+      loadRepoData: function() {
 
-      }
+      },
+      componentDidMount: function() {
+        //add ajax calls
+        this.loadUserData();
+        this.loadRepoData();
+      },
       render: function(){
         return(
           <div>
