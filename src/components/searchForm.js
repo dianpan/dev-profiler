@@ -12,7 +12,7 @@ var SearchForm = React.createClass({
     if(!username){
       alert("Please enter a username");
       return;
-    }
+    };
     this.props.onFormSubmit(username);
   },
   render: function(){
@@ -27,7 +27,7 @@ var SearchForm = React.createClass({
   },
   usernameInput: function(e){
     this.setState({username: e.target.value});
-  }
+  };
 });
 
 module.exports = SearchForm;

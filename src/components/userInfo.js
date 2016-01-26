@@ -40,7 +40,7 @@ var UserInfo = React.createClass({
         </div>
       </div>
       )
-  }
+  };
 });
 
 module.exports = UserInfo;

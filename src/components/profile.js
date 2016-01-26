@@ -18,14 +18,14 @@ var Profile = React.createClass({
         user: 'https://api.github.com/users'
       },
       perPage: 10
-    }
+    };
   },
   getInitialState: function(){
     return {
       username: null,
       userData: [],
       repoData: []
-    }
+    };
   },
   loadUserData: function() {
     $.ajax({
@@ -65,7 +65,7 @@ var Profile = React.createClass({
         {this.state.username ? <Repos repoData={this.state.repoData} /> : null}
       </div>
       )
-  }
+  };
   });
 
 module.exports = Profile;

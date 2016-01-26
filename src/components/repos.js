@@ -14,7 +14,7 @@ var Repos = React.createClass({
         {repoNodes}
       </div>
       )
-  }
+  };
 });
 
 module.exports = Repos;

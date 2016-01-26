@@ -12,7 +12,7 @@ var Repo = React.createClass({
         <p>{this.props.description}</p>
       </div>
       )
-  }
+  };
 });
 
 module.exports = Repo;
